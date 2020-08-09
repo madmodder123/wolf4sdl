@@ -109,8 +109,8 @@ void	VL_SetVGAPlaneMode (void)
 
     window = SDL_CreateWindow(title, SDL_WINDOWPOS_UNDEFINED,
                               SDL_WINDOWPOS_UNDEFINED, screenWidth,
-                              screenHeight, SDL_WINDOW_ALLOW_HIGHDPI
-                              | (fullscreen ? SDL_WINDOW_FULLSCREEN_DESKTOP : 0));
+                              screenHeight, SDL_WINDOW_FULLSCREEN
+                              | SDL_WINDOW_OPENGL | (fullscreen ? SDL_WINDOW_FULLSCREEN_DESKTOP : 0));
     if(!window)
     {
         printf("Unable to create %ix%ix%i window: %s\n", screenWidth,
@@ -118,7 +118,7 @@ void	VL_SetVGAPlaneMode (void)
         exit(1);
     }
 
-    renderer = SDL_CreateRenderer(window, -1, 0);
+    renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_PRESENTVSYNC);
     if(!renderer)
     {
         printf("Unable to create renderer: %s\n", SDL_GetError());
